@@ -4,13 +4,12 @@ import { Typography } from "@/components/ui/typography";
 import { DataTable } from "@/components/ui/data-table";
 import { columns, itemSchema } from "@/components/table-columns/items";
 import { z } from "zod";
-import { Box, ChartNoAxesColumn, FileClock, LogOut } from "lucide-react";
+import { Box, ChartNoAxesColumn, LogOut } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import { Button } from "@/components/ui/button";
 import TransactionPage from "@/components/pages/TransactionsPage";
 
 const items: z.infer<typeof itemSchema>[] = [
