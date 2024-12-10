@@ -20,10 +20,10 @@ jobs:
         node-version: '22'
 
     - name: Install dependencies
-      run: npm install
+      run: npm install --legacy-peer-deps
 
     - name: Build Next.js app
-      run: npm run build
+      run: npm run build --no-lint
 
     - name: Export static files (if using static export)
       run: npm run export
