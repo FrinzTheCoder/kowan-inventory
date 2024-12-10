@@ -23,7 +23,7 @@ jobs:
       run: npm install --legacy-peer-deps
 
     - name: Build Next.js app
-      run: next build --no-lint
+      run: npm run build
 
     - name: Export static files (if using static export)
       run: npm run export
