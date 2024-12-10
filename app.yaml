@@ -3,6 +3,7 @@ instance_class: F2
 
 env_variables:
   NODE_ENV: "production"
+  NPM_CONFIG_LEGACY_PEER_DEPS: "true"
 
 # Optional: static files (only if using `npm run export`)
 handlers:
