@@ -1,0 +1,45 @@
+name: Deploy to Google App Engine
+
+on:
+  push:
+    branches:
+      - testdeploy
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy Next.js to GAE
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build Next.js app
+      run: npm run build
+
+    - name: Export static files (if using static export)
+      run: npm run export
+
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT }}
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.PROJECT_ID }}
+
+    - name: Deploy to App Engine
+      run: |
+        echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env.production
+        echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+        gcloud app deploy --quiet
