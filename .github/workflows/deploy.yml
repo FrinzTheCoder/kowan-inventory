@@ -23,6 +23,9 @@ jobs:
       run: npm install --legacy-peer-deps
 
     - name: Build Next.js app
+      env:
+        NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
       run: npm run build
 
     - name: Authenticate with Google Cloud
@@ -39,4 +42,4 @@ jobs:
       run: |
         echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env.production
         echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
-        gcloud app deploy --quiet
+        gcloud app deploy app.yaml --quiet
